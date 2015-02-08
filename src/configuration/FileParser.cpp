@@ -22,7 +22,7 @@ FileParser::FileParser(int argc, char* argv[]) :
 	try {
 		bpo::store(bpo::command_line_parser(argc, argv).
 				options(OPTIONS).positional(POSITIONALS).run(), vm);
-	} catch (bpo::unknown_option er) {
+	} catch (bpo::unknown_option &er) {
 		cout << "Sintassi chiamata programma errata: " << er.what() << endl;
 		cout << OPTIONS << endl;
 		commandsOK = false;

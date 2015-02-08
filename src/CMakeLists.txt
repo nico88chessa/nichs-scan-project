@@ -22,6 +22,6 @@ ENDFOREACH(dir)
 #add_executable(main main.cpp)
 # CUDA_ADD_EXECUTABLE(main main.cpp)
 
-#ADD_EXECUTABLE(main main.cpp Prova.hpp Prova.cpp)
+#ADD_EXECUTABLE(main main.cpp)
 ADD_EXECUTABLE(main main.cpp)
 TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
