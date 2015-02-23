@@ -21,7 +21,3 @@ void CyclicRunnable::run() {
 void CyclicRunnable::doBeforeCycle() { }
 
 void CyclicRunnable::doAfterCycle() { }
-
-bool CyclicRunnable::hasCycle() {
-	return this->hasNext();
-}

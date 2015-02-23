@@ -8,8 +8,8 @@
 #ifndef THREADING_CONTROLLERCYCLICRUNNABLE_HPP_
 #define THREADING_CONTROLLERCYCLICRUNNABLE_HPP_
 
-#include <CyclicRunnable.h>
-#include <ThreadController.hpp>
+#include "CyclicRunnable.h"
+#include "ThreadController.hpp"
 #include <boost/shared_ptr.hpp>
 
 class ControllerCyclicRunnable : public CyclicRunnable {
@@ -26,7 +26,9 @@ public:
 
 	virtual ~ControllerCyclicRunnable();
 
-	bool ControllerCyclicRunnable::hasCycle();
+	bool hasCycle();
+
+	bool hasNext();
 
 };
 

@@ -8,7 +8,7 @@
 #include "ThreadController.hpp"
 
 ThreadController::ThreadController(bool startStopped = false) :
-	isRunning(true), isEnded(false), isRunning(!startStopped), runStep(false), mode(RunningMode::RUN) {
+	isEnded(false), isRunning(!startStopped), runStep(false), mode(RUN) {
 
 }
 
@@ -20,7 +20,7 @@ bool ThreadController::canStep() {
 	while (waitingCondition())
 		cond.wait(lock);
 
-	if (mode==RunningMode::STEP)
+	if (mode==STEP)
 		runStep=false;
 
 	return !isEnded;
@@ -28,14 +28,14 @@ bool ThreadController::canStep() {
 
 void ThreadController::doStep() {
 	UniqueLock lock(mutex);
-	mode = RunningMode::STEP;
+	mode = STEP;
 	runStep = true;
 	cond.notify_all();
 }
 
 void ThreadController::play() {
 	UniqueLock lock(mutex);
-	mode = RunningMode::RUN;
+	mode = RUN;
 	isRunning = true;
 	cond.notify_all();
 }
@@ -59,7 +59,7 @@ bool ThreadController::waitingCondition() {
 
 	if (!isEnded) {
 //		!isEnded && !isRunning
-		if (mode == RunningMode::RUN) {
+		if (mode == RUN) {
 			return !isRunning;
 		} else {
 			return !runStep;

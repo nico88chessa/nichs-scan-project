@@ -15,5 +15,9 @@ ControllerCyclicRunnable::~ControllerCyclicRunnable() {
 }
 
 bool ControllerCyclicRunnable::hasCycle() {
-	return threadController->canStep() && CyclicRunnable::hasNext();
+	return threadController->canStep() && hasNext();
+}
+
+bool ControllerCyclicRunnable::hasNext() {
+	return true;
 }

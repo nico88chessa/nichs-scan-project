@@ -17,8 +17,6 @@ public:
 
 	virtual ~CyclicRunnable();
 
-	virtual bool hasNext() = 0;
-
 	virtual bool hasCycle() = 0;
 
 	virtual void doCycle() = 0;

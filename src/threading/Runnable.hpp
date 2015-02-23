@@ -13,6 +13,8 @@ public:
 
 	virtual void run() = 0;
 
+	virtual ~Runnable();
+
 	/**
 	 * Not override!!!
 	 * This is useful for Boost::Thread libraries
