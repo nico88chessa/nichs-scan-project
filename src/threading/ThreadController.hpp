@@ -24,11 +24,12 @@ private:
 
 	bool waitingCondition();
 
+
 public:
 	typedef boost::shared_ptr<ThreadController> Ptr;
 	typedef const boost::shared_ptr<ThreadController> ConstPtr;
 
-	ThreadController(bool _startStopped);
+	ThreadController(bool _startStopped = false);
 
 	virtual ~ThreadController();
 

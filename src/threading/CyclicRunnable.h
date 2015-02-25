@@ -13,8 +13,6 @@
 class CyclicRunnable: public Runnable {
 public:
 
-	CyclicRunnable();
-
 	virtual ~CyclicRunnable();
 
 	virtual bool hasCycle() = 0;

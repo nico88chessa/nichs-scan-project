@@ -7,6 +7,9 @@
 
 #include "CyclicRunnable.h"
 
+CyclicRunnable::~CyclicRunnable() {
+}
+
 void CyclicRunnable::run() {
 
 	doBeforeCycle();

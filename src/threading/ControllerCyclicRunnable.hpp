@@ -22,13 +22,13 @@ public:
 	typedef ControllerCyclicRunnable * Ptr;
 	typedef const ControllerCyclicRunnable * ConstPtr;
 
-	ControllerCyclicRunnable(ThreadController::ConstPtr controller);
+	ControllerCyclicRunnable(ThreadController::Ptr controller);
 
 	virtual ~ControllerCyclicRunnable();
 
 	bool hasCycle();
 
-	bool hasNext();
+	virtual bool hasNext() = 0;
 
 };
 

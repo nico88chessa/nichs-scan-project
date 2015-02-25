@@ -7,7 +7,7 @@
 
 #include "ThreadController.hpp"
 
-ThreadController::ThreadController(bool startStopped = false) :
+ThreadController::ThreadController(bool startStopped) :
 	isEnded(false), isRunning(!startStopped), runStep(false), mode(RUN) {
 
 }

@@ -3,7 +3,7 @@ PROJECT(imageSegmentation)
 
 FIND_PACKAGE(CUDA REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
-FIND_PACKAGE(Boost 1.57 REQUIRED program_options)
+FIND_PACKAGE(Boost 1.57 REQUIRED program_options thread system)
 
 SET (MY_LIBS ${MY_LIBS} ${Boost_LIBRARIES} ${OpenCV_LIBS})
 
@@ -16,6 +16,7 @@ INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 
 SET(MY_FOLDERS
   configuration
+  threading
   utility
   )
 
@@ -30,3 +31,6 @@ ENDFOREACH(dir)
 #ADD_EXECUTABLE(main main.cpp)
 ADD_EXECUTABLE(main main.cpp)
 TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
+
+ADD_EXECUTABLE(main2 main2.cpp)
+TARGET_LINK_LIBRARIES(main2 ${MY_FOLDERS} ${MY_LIBS})

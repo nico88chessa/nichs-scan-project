@@ -7,7 +7,7 @@
 
 #include "ControllerCyclicRunnable.hpp"
 
-ControllerCyclicRunnable::ControllerCyclicRunnable(ThreadController::ConstPtr controller):
+ControllerCyclicRunnable::ControllerCyclicRunnable(ThreadController::Ptr controller):
 	threadController(controller) {
 }
 
@@ -16,8 +16,4 @@ ControllerCyclicRunnable::~ControllerCyclicRunnable() {
 
 bool ControllerCyclicRunnable::hasCycle() {
 	return threadController->canStep() && hasNext();
-}
-
-bool ControllerCyclicRunnable::hasNext() {
-	return true;
 }
