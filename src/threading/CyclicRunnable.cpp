@@ -5,7 +5,7 @@
  *      Author: nicola
  */
 
-#include "CyclicRunnable.h"
+#include "CyclicRunnable.hpp"
 
 CyclicRunnable::~CyclicRunnable() {
 }

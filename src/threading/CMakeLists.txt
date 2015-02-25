@@ -3,6 +3,7 @@ SET (threading_SRC
   ControllerCyclicRunnable.cpp
   ControllerCyclicRunnable.hpp
   CyclicRunnable.cpp
+  CyclicRunnable.hpp
   Runnable.hpp
   ThreadController.cpp
   ThreadController.hpp

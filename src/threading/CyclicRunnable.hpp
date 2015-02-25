@@ -5,8 +5,8 @@
  *      Author: nicola
  */
 
-#ifndef THREADING_CYCLICRUNNABLE_H_
-#define THREADING_CYCLICRUNNABLE_H_
+#ifndef THREADING_CYCLICRUNNABLE_HPP_
+#define THREADING_CYCLICRUNNABLE_HPP_
 
 #include "Runnable.hpp"
 
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif /* THREADING_CYCLICRUNNABLE_H_ */
+#endif /* THREADING_CYCLICRUNNABLE_HPP_ */
