@@ -17,6 +17,7 @@ INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 SET(MY_FOLDERS
   configuration
   utility
+  visualizer
   )
 
 FOREACH(dir ${MY_FOLDERS})
@@ -28,5 +29,7 @@ ENDFOREACH(dir)
 # CUDA_ADD_EXECUTABLE(main main.cpp)
 
 #ADD_EXECUTABLE(main main.cpp)
-ADD_EXECUTABLE(main main.cpp)
-TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
+#TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
+
+ADD_EXECUTABLE(VisualizerTest VisualizerTest.cpp)
+TARGET_LINK_LIBRARIES(VisualizerTest ${MY_FOLDERS} ${MY_LIBS})
