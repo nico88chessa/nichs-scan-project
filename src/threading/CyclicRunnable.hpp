@@ -10,7 +10,7 @@
 
 #include "Runnable.hpp"
 
-class CyclicRunnable: public Runnable {
+class CyclicRunnable : public Runnable {
 public:
 
 	virtual ~CyclicRunnable();

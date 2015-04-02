@@ -11,18 +11,16 @@
 #include "AbstractEvent.hpp"
 #include "EventHandler.hpp"
 #include "events/EventProva.hpp"
-#include <boost/shared_ptr.hpp>
 #include <map>
+#include <stdexcept>
 
 class KeyboardHandler : public EventHandler<char, AbstractEvent<> > {
-private:
-	typedef boost::shared_ptr<AbstractEvent<> > AbstractEventPtr;
 public:
-	typedef std::map<int, AbstractEventPtr> MapEvents;
+	typedef boost::shared_ptr<KeyboardHandler> Ptr;
+	typedef std::map<int, AbstractEvent<>::Ptr> MapEvents;
 	typedef std::map<char, int> MapCharEvents;
 
 private:
-
 	MapEvents events;
 	MapCharEvents events2char;
 
@@ -31,6 +29,10 @@ public:
 	virtual ~KeyboardHandler();
 
 	AbstractEvent<>& process(char c);
+
+	void addEvent(AbstractEvent<>::Ptr& event, char input);
+
+	int getEventCodeFromInput(char input) const;
 };
 
 #endif /* VISUALIZER_KEYBOARDHANDLER_HPP_ */
