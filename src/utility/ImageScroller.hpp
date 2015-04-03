@@ -11,6 +11,7 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include <opencv2/core/core.hpp>
+#include <utility>
 
 class ImageScroller {
 public:
@@ -25,7 +26,9 @@ private:
 
 public:
 	ImageScroller(const std::vector<cv::Mat>& _images);
+	ImageScroller(std::vector<cv::Mat>&& _images);
 	ImageScroller(const ImageScroller& _imageScroller);
+	ImageScroller(ImageScroller&& _imageScroller);
 	virtual ~ImageScroller();
 
 	const cv::Mat& next();

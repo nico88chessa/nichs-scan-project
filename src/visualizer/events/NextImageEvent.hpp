@@ -15,18 +15,18 @@
 class NextImageEvent : public AbstractEvent<int>{
 private:
 	Visualizer::ConstPtr vis;
-	ImageScroller imageScroller;
+	ImageScroller::Ptr imageScroller;
 
 public:
 	// 10 e' per prova
-	NextImageEvent(const Visualizer::ConstPtr& _vis, const ImageScroller& _imageScroller):
+	NextImageEvent(const Visualizer::ConstPtr& _vis, ImageScroller::Ptr _imageScroller):
 		AbstractEvent<int>(10), vis(_vis), imageScroller(_imageScroller) {
 	}
 	~NextImageEvent() {
 	}
 
 	void doEvent() {
-		cv::Mat temp = imageScroller.next().clone();
+		cv::Mat temp = (*imageScroller).next().clone();
 		vis->updateImage(temp);
 	}
 };
