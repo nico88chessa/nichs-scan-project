@@ -1,0 +1,21 @@
+/*
+ * Events.hpp
+ *
+ *  Created on: 03/apr/2015
+ *      Author: nicola
+ */
+
+#ifndef VISUALIZER_EVENTS_EVENTS_HPP_
+#define VISUALIZER_EVENTS_EVENTS_HPP_
+
+enum EVENTS_CODE {
+	NEXT_IMAGE,
+	PREVIOUS_IMAGE,
+	START_ALGORITHM,
+	PAUSE_ALGORITHM,
+	STOP_ALGORITHM,
+	SAVE_IMAGES,
+	EXIT
+};
+
+#endif /* VISUALIZER_EVENTS_EVENTS_HPP_ */
