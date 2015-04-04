@@ -1,16 +1,16 @@
-#include <iostream>
-
+#include "utility/Utility.hpp"
+#include "utility/ImageScroller.hpp"
 #include "visualizer/KeyboardHandler.hpp"
 #include "visualizer/IOVisualizer.hpp"
+#include "configuration/ImageLoader.hpp"
+#include "configuration/FileParser.hpp"
+#include "events/NextImageEvent.hpp"
+#include "events/PreviousImageEvent.hpp"
+
+#include <iostream>
+#include <utility>
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
-#include <events/NextImageEvent.hpp>
-#include <events/PreviousImageEvent.hpp>
-#include "ImageLoader.hpp"
-#include "ImageScroller.hpp"
-#include <iostream>
-#include "configuration/FileParser.hpp"
-#include <utility>
 
 using namespace std;
 
@@ -21,11 +21,22 @@ int main(int argc, char** argv) {
 	if (!fp.isCommandsOk())
 		exit(-1);
 
-	const std::string& input = fp.getInputDirectory();
-	const std::string& output = fp.getOutputDirectory();
+	const string& inputDirectory = fp.getInputDirectory();
+	const vector<string>& inputFiles = fp.getListItems();
+	const string& output = fp.getOutputDirectory();
 
-	ImageLoader imageLoader(input);
-	ImageScroller::Ptr imageScroller = boost::make_shared<ImageScroller>(std::move(imageLoader.getImages()));
+	vector<cv::Mat> images = Utility::loadImagesFromPath(inputDirectory);
+	vector<cv::Mat> images2 = Utility::loadImagesFromList(inputFiles);
+
+	ImageScroller::Ptr imageScroller;
+	if (!images.empty())
+		imageScroller = boost::make_shared<ImageScroller>(move(images));
+	else if (!images2.empty())
+		imageScroller = boost::make_shared<ImageScroller>(move(images2));
+	else {
+		cout << "Nessuna Immagina caricata." << endl;
+		exit(-1);
+	}
 	// here imageLoader is in non-defined state
 
 	KeyboardHandler::Ptr test = boost::make_shared<KeyboardHandler>();

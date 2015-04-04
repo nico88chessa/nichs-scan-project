@@ -23,8 +23,8 @@ INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 
 SET(MY_FOLDERS
   visualizer
-  configuration
   threading
+  configuration
   utility
   )
 
