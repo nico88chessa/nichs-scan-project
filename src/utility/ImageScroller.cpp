@@ -11,11 +11,11 @@ using namespace std;
 using namespace cv;
 
 ImageScroller::ImageScroller(const vector<Mat>& _images): images(_images) {
-	iterator = images.begin();
+	iterator = images.end()-1;
 }
 
 ImageScroller::ImageScroller(vector<Mat>&& _images): images(std::move(_images)) {
-	iterator = images.begin();
+	iterator = images.end()-1;
 }
 
 ImageScroller::ImageScroller(const ImageScroller& _imageScroller):
@@ -28,7 +28,7 @@ ImageScroller::ImageScroller(ImageScroller&& _imageScroller):
 }
 
 bool ImageScroller::hasNext() {
-	return iterator != images.end();
+	return iterator != (images.end()-1);
 }
 
 bool ImageScroller::hasPrevious() const {
@@ -39,18 +39,19 @@ ImageScroller::~ImageScroller() {
 }
 
 const cv::Mat& ImageScroller::next() {
-	vector<Mat>::const_iterator temp = iterator;
-	iterator++;
-	if (!hasNext())
+	if (hasNext())
+		iterator++;
+	else
 		iterator = images.begin();
+	vector<Mat>::const_iterator temp = iterator;
 	return *temp;
 }
 
 const cv::Mat& ImageScroller::previos() {
-	vector<Mat>::const_iterator temp = iterator;
 	if (hasPrevious())
 		iterator--;
 	else
 		iterator = (images.end()-1);
+	vector<Mat>::const_iterator temp = iterator;
 	return *temp;
 }

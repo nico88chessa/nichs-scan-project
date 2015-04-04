@@ -11,6 +11,7 @@
 #include "AbstractEvent.hpp"
 #include "Visualizer.hpp"
 #include "ImageScroller.hpp"
+#include "Events.hpp"
 
 class NextImageEvent : public AbstractEvent<int>{
 private:
@@ -18,15 +19,14 @@ private:
 	ImageScroller::Ptr imageScroller;
 
 public:
-	// 10 e' per prova
 	NextImageEvent(const Visualizer::ConstPtr& _vis, ImageScroller::Ptr _imageScroller):
-		AbstractEvent<int>(10), vis(_vis), imageScroller(_imageScroller) {
+		AbstractEvent<int>(EVENTS_CODE::NEXT_IMAGE), vis(_vis), imageScroller(_imageScroller) {
 	}
 	~NextImageEvent() {
 	}
 
 	void doEvent() {
-		cv::Mat temp = (*imageScroller).next().clone();
+		cv::Mat temp = (*imageScroller).next();
 		vis->updateImage(temp);
 	}
 };

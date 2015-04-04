@@ -8,13 +8,15 @@
 #ifndef VISUALIZER_IOVISUALIZER_HPP_
 #define VISUALIZER_IOVISUALIZER_HPP_
 
-#include "Visualizer.hpp"
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/lock_types.hpp>
+
+#include "Visualizer.hpp"
 #include "../threading/CyclicRunnable.hpp"
+#include "events/Events.hpp"
 #include "KeyboardHandler.hpp"
 
 static void callback(int event, int x, int y, int flags, void* userdata);
@@ -41,6 +43,7 @@ private:
 		~KeyRunnable() { };
 
 		bool hasCycle() {
+//			return vis->keyboardHandler->getEventCodeFromInput(vis->keyPressed) != EVENTS_CODE::EXIT;
 			return vis->keyPressed != 'q';
 		};
 
