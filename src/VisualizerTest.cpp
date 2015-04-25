@@ -6,11 +6,13 @@
 #include "configuration/FileParser.hpp"
 #include "events/NextImageEvent.hpp"
 #include "events/PreviousImageEvent.hpp"
+#include "events/ExitEvent.hpp"
 
 #include <iostream>
 #include <utility>
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
+
 
 using namespace std;
 
@@ -44,9 +46,13 @@ int main(int argc, char** argv) {
 
 	NextImageEvent::Ptr nextImage = boost::make_shared<NextImageEvent>(testWin2, imageScroller);
 	PreviousImageEvent::Ptr previousImage = boost::make_shared<PreviousImageEvent>(testWin2, imageScroller);
+	ExitEvent::Ptr exitEvent = boost::make_shared<ExitEvent>(testWin2, imageScroller);
+
 	test->addEvent(nextImage, 'n');
 	test->addEvent(previousImage, 'p');
+	test->addEvent(exitEvent, 'q');
 
-	testWin2->show();
+	testWin2->wait();
 
+	cout << "END" << endl;
 }
