@@ -8,9 +8,9 @@
 #ifndef VISUALIZER_EVENTS_PREVIOUSIMAGEEVENT_HPP_
 #define VISUALIZER_EVENTS_PREVIOUSIMAGEEVENT_HPP_
 
-#include "AbstractEvent.hpp"
-#include "Visualizer.hpp"
-#include "ImageScroller.hpp"
+#include "../AbstractEvent.hpp"
+#include "../Visualizer.hpp"
+#include "../../utility/ImageScroller.hpp"
 #include "Events.hpp"
 
 class PreviousImageEvent : public AbstractEvent<int>{

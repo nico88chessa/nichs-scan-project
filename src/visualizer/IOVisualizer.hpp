@@ -11,6 +11,7 @@
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/lock_types.hpp>
 
@@ -34,24 +35,23 @@ private:
 	// friend keyword let outer class members' access by inner class
 	friend class IOVisualizer::KeyRunnable; // this is no longer valid for recent g++ specification
 
-	class KeyRunnable: public CyclicRunnable {
+	mutable class KeyRunnable: public CyclicRunnable {
 	private:
-		IOVisualizer* vis;
+		char keyPressed;
+		const IOVisualizer* vis;
 	public:
-		KeyRunnable(IOVisualizer *v): vis(v) { };
+		KeyRunnable(const IOVisualizer *v): vis(v), keyPressed(0) { };
 
 		~KeyRunnable() { };
 
 		bool hasCycle() {
-//			return vis->keyboardHandler->getEventCodeFromInput(vis->keyPressed) != EVENTS_CODE::EXIT;
-			return vis->keyPressed != 'q';
+			return vis->keyboardHandler->getEventCodeFromInput(keyPressed) != EVENTS_CODE::EXIT;
 		};
 
 		void doCycle() {
-//			std::cout << "Premere un tasto: ";
-			vis->keyPressed = cv::waitKey();
-			vis->processEvent(vis->keyPressed);
-//			std::cout << vis->keyPressed << std::endl;
+			std::cout << "Window: " << vis->getWindowName() << std::endl;
+			keyPressed = cv::waitKey();
+			vis->processEvent(keyPressed);
 		};
 
 	} keyRunnable;
@@ -61,40 +61,37 @@ private:
 
 	class MouseCallback {
 	private:
-		IOVisualizer* vis;
+		const IOVisualizer* vis;
+		char mousePressed;
 	public:
-		MouseCallback(IOVisualizer *v): vis(v) { }
+		MouseCallback(const IOVisualizer *v): vis(v), mousePressed(0) { }
 		~MouseCallback() { }
 
 		void callback(int event, int x, int y, int flags, void* userdata) {
-			vis->keyPressed = event+0x30;
+			mousePressed = event+0x30;
+			std::cout << "callback handler" << mousePressed << std::endl;
 			if (event>0)
-				std::cout << vis->keyPressed << std::endl;
-			// std::cout << "callback handler" << std::endl;
+				std::cout << mousePressed << std::endl;
 		}
 
 	} mouseCallback;
 
-	char keyPressed;
 	boost::shared_ptr<KeyboardHandler> keyboardHandler;
 	// thread safe
-	boost::mutex mutex;
+	mutable boost::mutex mutex;
+	boost::thread keyListener;
 
-	void processEvent(char c);
+	void processEvent(char c) const;
 
 public:
 	IOVisualizer(std::string _windowName);
 	IOVisualizer(std::string _windowName, const KeyboardHandler::Ptr& _keyboardHandler);
 	IOVisualizer(std::string _windowName, int _flags, const KeyboardHandler::Ptr& _keyboardHandler);
 	~IOVisualizer();
-	char getKeyPressed() const;
-
-	void setKeyPressed(char keyPressed);
 
 	void callMouse(int event, int x, int y, int flags, void* userdata);
-
-	void show();
-
+	void wait();
+	void run();
 };
 
 #endif /* VISUALIZER_IOVISUALIZER_HPP_ */

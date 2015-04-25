@@ -12,38 +12,36 @@ using namespace cv;
 
 IOVisualizer::IOVisualizer(std::string _windowName):
 	Visualizer(_windowName), keyRunnable(this), mouseCallback(this), keyboardHandler() {
-	keyPressed = '0';
+	showWindow();
+	setMouseCallback(_windowName, callback, this);
+	keyListener = boost::thread(boost::ref(keyRunnable));
 }
 
 IOVisualizer::IOVisualizer(std::string _windowName, const KeyboardHandler::Ptr& _keyboardHandler):
 	Visualizer(_windowName), keyRunnable(this), mouseCallback(this), keyboardHandler(_keyboardHandler) {
-
-	keyPressed = '0';
+	showWindow();
+	setMouseCallback(_windowName, callback, this);
+	keyListener = boost::thread(boost::ref(keyRunnable));
 };
 
 IOVisualizer::IOVisualizer(std::string _windowName, int _flags, const KeyboardHandler::Ptr& _keyboardHandler):
 	Visualizer(_windowName, _flags), keyRunnable(this), mouseCallback(this), keyboardHandler(_keyboardHandler) {
-	keyPressed = '0';
+	showWindow();
+	setMouseCallback(_windowName, callback, this);
+	keyListener = boost::thread(boost::ref(keyRunnable));
 }
 
 IOVisualizer::~IOVisualizer() {
 }
 
-char IOVisualizer::getKeyPressed() const {
-	return keyPressed;
-}
 
-void IOVisualizer::processEvent(char c) {
+void IOVisualizer::processEvent(char c) const {
 	UniqueLock(mutex);
 	keyboardHandler.get()->process(c).doEvent();
 }
 
-void IOVisualizer::setKeyPressed(char keyPressed) {
-	this->keyPressed = keyPressed;
-}
 
 void callback(int event, int x, int y, int flags, void* userdata) {
-//	std::cout << "callback handler" << std::endl;
 	IOVisualizer *v = (IOVisualizer*) userdata;
 	v->callMouse(event, x, y, flags, userdata);
 }
@@ -52,8 +50,6 @@ void IOVisualizer::callMouse(int event, int x, int y, int flags, void* userdata)
 	mouseCallback.callback(event, x, y, flags, userdata);
 }
 
-void IOVisualizer::show() {
-	setMouseCallback(getWindowName(), callback, this);
-	showWindow();
-	keyRunnable.run();
+void IOVisualizer::wait() {
+	keyListener.join();
 }
