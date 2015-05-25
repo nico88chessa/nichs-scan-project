@@ -27,8 +27,10 @@ int main(int argc, char** argv) {
 	const vector<string>& inputFiles = fp.getListItems();
 	const string& output = fp.getOutputDirectory();
 
-	vector<cv::Mat> images = Utility::loadImagesFromPath(inputDirectory);
-	vector<cv::Mat> images2 = Utility::loadImagesFromList(inputFiles);
+	vector<cv::Mat> images;
+	Utility::loadImagesFromPath(inputDirectory, images);
+	vector<cv::Mat> images2;
+	Utility::loadImagesFromList(inputFiles, images2);
 
 	ImageScroller::Ptr imageScroller;
 	if (!images.empty())

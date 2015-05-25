@@ -1,4 +1,4 @@
-QT5_WRAP_UI(UIS_HEADERS mainwindow.ui)
+# QT5_WRAP_UI(UIS_HEADERS mainwindow.ui ImageViewerForm.ui)
 
 FILE(GLOB_RECURSE qt_SRC "*.hpp" "*.cpp" "*.h")
 
