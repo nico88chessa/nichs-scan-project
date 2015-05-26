@@ -10,23 +10,22 @@
 
 #include "../AbstractEvent.hpp"
 #include "../Visualizer.hpp"
-#include "../../utility/ImageScroller.hpp"
 #include "Events.hpp"
 
 class NextImageEvent : public AbstractEvent<int>{
 private:
 	Visualizer::ConstPtr vis;
-	ImageScroller::Ptr imageScroller;
+	Container<std::string, Image>::CyclicIterator::Ptr imageScroller;
 
 public:
-	NextImageEvent(const Visualizer::ConstPtr& _vis, ImageScroller::Ptr _imageScroller):
+	NextImageEvent(const Visualizer::ConstPtr& _vis, Container<std::string, Image>::CyclicIterator::Ptr _imageScroller):
 		AbstractEvent<int>(EVENTS_CODE::NEXT_IMAGE), vis(_vis), imageScroller(_imageScroller) {
 	}
 	~NextImageEvent() {
 	}
 
 	void doEvent() {
-		cv::Mat temp = (*imageScroller).next();
+		cv::Mat&& temp = imageScroller->next().getImageCopy();
 		vis->updateImage(temp);
 	}
 };

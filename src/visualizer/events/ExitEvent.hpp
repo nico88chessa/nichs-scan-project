@@ -13,8 +13,8 @@
 
 class ExitEvent : public AbstractEvent<int>{
 public:
-	ExitEvent(const Visualizer::ConstPtr& _vis, ImageScroller::Ptr _imageScroller):
-		AbstractEvent<int>(EVENTS_CODE::EXIT) {
+	ExitEvent(const Visualizer::ConstPtr& _vis)
+		: AbstractEvent<int>(EVENTS_CODE::EXIT) {
 	}
 
 	~ExitEvent() {
