@@ -9,25 +9,32 @@
 #define DATA_CONTAINER_HPP_
 
 #include <boost/container/map.hpp>
+#include <boost/shared_ptr.hpp>
 
 template <typename K, typename T>
 class Container {
 public:
-	typedef Container<K, T>* Ptr;
-	typedef const Container<K, T>* ConstPtr;
+	typedef boost::shared_ptr<Container<K, T> > Ptr;
+	typedef boost::shared_ptr<const Container<K, T> > ConstPtr;
+
 	friend class CyclicIterator;
 
 	class CyclicIterator {
+	public:
+		typedef boost::shared_ptr<CyclicIterator> Ptr;
+		typedef boost::shared_ptr<const CyclicIterator> ConstPtr;
 	private:
 		typedef typename boost::container::map<K, T>::const_iterator MapIterator;
-		Container::ConstPtr ptr;
+
+		const Container<K, T>* ptr;
 		MapIterator current;
 
 	public:
 		CyclicIterator() : ptr(new Container<K, T>()), current(ptr->buffer.end()) {
 		}
 
-		CyclicIterator(Container::ConstPtr _ptr) : ptr(_ptr), current(ptr->buffer.end()) {
+		CyclicIterator(const Container<K, T>* _ptr)
+			: ptr(_ptr), current(ptr->buffer.end()) {
 		}
 
 		CyclicIterator(const CyclicIterator& _iterator)
@@ -128,14 +135,6 @@ public:
 		}
 		return K();
 	}
-
-//	std::vector<K> getKeys() const {
-//		std::vector<K> keys;
-//		typename boost::container::map<K, T>::iterator it;
-//		for (it = buffer.begin(); it != buffer.end(); it++)
-//			keys.push_back(it->first);
-//		return keys;
-//	}
 
 	std::vector<T> getValues() const {
 		std::vector<T> values;

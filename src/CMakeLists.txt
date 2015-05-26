@@ -46,7 +46,6 @@ MESSAGE("Qt5Core_INCLUDE_DIRS = " ${Qt5Core_INCLUDE_DIRS})
 SET(MY_FOLDERS
   visualizer
   threading
-  configuration
   qt
   utility
   data
@@ -57,18 +56,8 @@ FOREACH(dir ${MY_FOLDERS})
   INCLUDE_DIRECTORIES(${dir}) # per far trovare a cmake i file header
 ENDFOREACH(dir)
 
-#add_executable(main main.cpp)
-# CUDA_ADD_EXECUTABLE(main main.cpp)
-
-#ADD_EXECUTABLE(main main.cpp)
-
-#TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
-
 ADD_EXECUTABLE(VisualizerTest VisualizerTest.cpp)
 TARGET_LINK_LIBRARIES(VisualizerTest ${MY_FOLDERS} ${MY_LIBS})
-
-# ADD_EXECUTABLE(main main.cpp)
-# TARGET_LINK_LIBRARIES(main ${MY_FOLDERS} ${MY_LIBS})
 
 ADD_EXECUTABLE(main2 main2.cpp)
 TARGET_LINK_LIBRARIES(main2 ${MY_FOLDERS} ${MY_LIBS})

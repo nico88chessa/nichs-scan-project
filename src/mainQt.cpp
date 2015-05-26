@@ -1,16 +1,14 @@
 #include "utility/Utility.hpp"
-#include "utility/ImageScroller.hpp"
 #include "utility/ImageUtils.hpp"
 #include "visualizer/KeyboardHandler.hpp"
 #include "visualizer/IOVisualizer.hpp"
-#include "configuration/ImageLoader.hpp"
-#include "configuration/FileParser.hpp"
 #include "events/NextImageEvent.hpp"
 #include "events/PreviousImageEvent.hpp"
 #include "events/ExitEvent.hpp"
+#include "utility/FileParser.hpp"
 
 #include <iostream>
-#include <utility>
+#include <Utility.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 
