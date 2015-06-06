@@ -26,6 +26,7 @@ SET(MY_FOLDERS
   visualizer
   threading
   utility
+  algorithm
   )
 
 FOREACH(dir ${MY_FOLDERS})
