@@ -22,7 +22,7 @@ SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 FIND_PACKAGE(CUDA REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
-FIND_PACKAGE(Boost 1.57 REQUIRED program_options thread system filesystem)
+FIND_PACKAGE(Boost 1.57 REQUIRED program_options thread system filesystem chrono)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(Qt5Core REQUIRED)
 
