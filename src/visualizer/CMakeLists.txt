@@ -1,6 +1,6 @@
 FILE(GLOB_RECURSE visualizer_SRC "*.hpp" "*.cpp")
 
-MESSAGE("visualzer_SRC:")
+MESSAGE("visualizer_SRC:")
 FOREACH(fileSrc ${visualizer_SRC})
   MESSAGE(${fileSrc})
 ENDFOREACH()

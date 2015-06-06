@@ -11,7 +11,7 @@ ENDIF()
 
 FIND_PACKAGE(CUDA REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
-FIND_PACKAGE(Boost 1.57 REQUIRED program_options thread system filesystem)
+FIND_PACKAGE(Boost 1.57 REQUIRED program_options thread system filesystem chrono)
 
 SET(MY_LIBS ${MY_LIBS} ${Boost_LIBRARIES} ${OpenCV_LIBS})
 

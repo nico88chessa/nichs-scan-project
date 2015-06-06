@@ -4,7 +4,7 @@ echo "Rimozione file in corso..."
 rm -f *.cmake
 rm -f *.txt
 rm -Rf CMakeFiles
-rm -Rf configuration threading utility visualizer qt data
+rm -Rf configuration threading utility visualizer qt data algorithm
 rm -f Makefile core
 rm -f main main2 VisualizerTest mainQt
 rm -f *.sh~
