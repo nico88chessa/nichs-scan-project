@@ -49,6 +49,7 @@ SET(MY_FOLDERS
   qt
   utility
   data
+  algorithm
   )
 
 FOREACH(dir ${MY_FOLDERS})

@@ -7,6 +7,9 @@
 #include "events/ExitEvent.hpp"
 #include "utility/FileParser.hpp"
 
+#include "algorithm/first_implementation/SampleAlgorithm.hpp"
+#include "algorithm/AlgorithmSignaler.hpp"
+
 #include <iostream>
 #include <Utility.hpp>
 #include <boost/make_shared.hpp>
@@ -43,6 +46,12 @@ int main(int argc, char *argv[]) {
 	std::vector<Image>::iterator itList = imagesList.begin();
 	for (; itList != imagesList.end(); itList++)
 		std::cout << itList->getImageName() << std::endl;
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	AbstractAlgorithm<cv::Mat, std::vector<cv::Mat> >::Ptr sample = boost::make_shared<SampleAlgorithm>();
+	sample->execute(images3.getValues().at(0).getImage());
+	AlgorithmSignaler<string>::Ptr signaler = boost::make_shared<AlgorithmSignaler<string> >();
 
 	///////////////////////////////////////////////////////////////////////////////
 
